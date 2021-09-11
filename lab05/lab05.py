@@ -11,8 +11,7 @@ def couple(s, t):
     [['c', 's'], [6, '1']]
     """
     assert len(s) == len(t)
-    "*** YOUR CODE HERE ***"
-
+    return [[s[i], t[i]] for i in range(len(s))]
 
 from math import sqrt
 def distance(city_a, city_b):
@@ -26,7 +25,7 @@ def distance(city_a, city_b):
     >>> distance(city_c, city_d)
     5.0
     """
-    "*** YOUR CODE HERE ***"
+    return sqrt((get_lat(city_a) - get_lat(city_b)) ** 2 + ((get_lon(city_a) - get_lon(city_b)) ** 2))
 
 def closer_city(lat, lon, city_a, city_b):
     """
@@ -43,7 +42,11 @@ def closer_city(lat, lon, city_a, city_b):
     >>> closer_city(41.29, 174.78, bucharest, vienna)
     'Bucharest'
     """
-    "*** YOUR CODE HERE ***"
+    test_city = make_city('test', lat, lon)
+    if distance(city_a, test_city) < distance(city_b, test_city):
+        return get_name(city_a)
+    else:
+        return get_name(city_b)
 
 def check_city_abstraction():
     """
@@ -142,8 +145,12 @@ def berry_finder(t):
     >>> berry_finder(t)
     True
     """
-    "*** YOUR CODE HERE ***"
-
+    if label(t) == 'berry':
+        return True
+    for branch in branches(t):
+        if berry_finder(branch):
+            return True
+    return False
 
 def sprout_leaves(t, leaves):
     """Sprout new leaves containing the data in leaves at each leaf in
@@ -178,7 +185,13 @@ def sprout_leaves(t, leaves):
           1
           2
     """
-    "*** YOUR CODE HERE ***"
+    if is_leaf(t):
+        return tree(label(t), [tree(leaf) for leaf in leaves])
+    else:
+        return tree(label(t), [sprout_leaves(branch, leaves) for branch in branches(t)])
+
+
+
 
 # Abstraction tests for sprout_leaves and berry_finder
 def check_abstraction():
@@ -236,8 +249,7 @@ def coords(fn, seq, lower, upper):
     >>> coords(fn, seq, 1, 9)
     [[-2, 4], [1, 1], [3, 9]]
     """
-    "*** YOUR CODE HERE ***"
-    return ______
+    return [[x, fn(x)] for x in seq if lower <= fn(x) <= upper]
 
 
 def riffle(deck):
@@ -249,8 +261,7 @@ def riffle(deck):
     >>> riffle(range(20))
     [0, 10, 1, 11, 2, 12, 3, 13, 4, 14, 5, 15, 6, 16, 7, 17, 8, 18, 9, 19]
     """
-    "*** YOUR CODE HERE ***"
-    return _______
+    return [deck[i // 2] if i % 2 == 0 else deck[(i-1) // 2 + len(deck) // 2] for i in range(len(deck))]
 
 
 def add_trees(t1, t2):
