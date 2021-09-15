@@ -37,6 +37,18 @@ def count_leaves(tree):
         branch_counts = [count_leaves(b) for b in branches(tree)]
         return sum(branch_counts)
 
+def increment_leaves(tree):
+    """Return a tree like t with all leaves incremented by 1"""
+    if is_leaf(tree):
+        return tree(label(tree) + 1)
+    else:
+        bs = [increment_leaves(b) for b in branches(tree)]
+        return tree(label(tree), bs)
+
+def increment(tree):
+    """Return a tree with all labels incremented by 1"""
+    return tree(label(tree) + 1, [increment(b) for b in branches(tree)])
+
 #Creating a partition tree
 def partition_tree(n, m):
     if n == 0:
@@ -47,6 +59,19 @@ def partition_tree(n, m):
         left = partition_tree(n-m, m)
         right = partition_tree(n, m-1)
         return tree(m, [left, right])
+
+
+def print_tree(tree):
+    """Prints all the values but doesn't indent"""
+    print(label(tree))
+    for b in branches(t):
+        print_tree(b)
+
+def print_tree_indented(tree, indent = 0):
+    """Better print tree function that indents"""
+    print("   " * indent + str(label(tree)))
+    for b in branches(tree):
+        print_tree_indented(b, indent + 1)
 
 #Creating a tree recursive function to traverse the partition tree
 def print_parts(tree, partition = []):
