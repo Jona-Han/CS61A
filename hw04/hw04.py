@@ -19,7 +19,17 @@ def make_bank(balance):
     120
     """
     def bank(message, amount):
-        "*** YOUR CODE HERE ***"
+        nonlocal balance
+        if message == 'deposit':
+            balance += amount
+            return balance
+        elif message == 'withdraw':
+            if balance < amount:
+                return 'Insufficient funds'
+            balance -= amount
+            return balance
+        else:
+            return 'Invalid message'
     return bank
 
 
@@ -51,8 +61,21 @@ def make_withdraw(balance, password):
     >>> type(w(10, 'l33t')) == str
     True
     """
-    "*** YOUR CODE HERE ***"
-
+    incorrect_guesses = []
+    def bank(amount, guess):
+        nonlocal balance
+        nonlocal incorrect_guesses
+        if guess != password and len(incorrect_guesses) < 3:
+            incorrect_guesses.append(guess) 
+            return 'Incorrect password'
+        elif len(incorrect_guesses) == 3:
+            return "Frozen account. Attempts: " + str(incorrect_guesses)
+        elif balance < amount:
+            return 'Insufficient funds'
+        else:
+            balance -= amount
+            return balance
+    return bank
 
 def repeated(t, k):
     """Return the first value in iterator T that appears K times in a row. Iterate through the items such that
@@ -75,7 +98,16 @@ def repeated(t, k):
     2
     """
     assert k > 1
-    "*** YOUR CODE HERE ***"
+    previous_number = None
+    same = 1
+    for current_number in t:
+        if current_number != previous_number:
+            previous_number = current_number
+            same = 1
+        else:
+            same += 1
+        if same == k:
+            return current_number
 
 
 def permutations(seq):
@@ -100,8 +132,12 @@ def permutations(seq):
     >>> sorted(permutations("ab"))
     [['a', 'b'], ['b', 'a']]
     """
-    "*** YOUR CODE HERE ***"
-
+    if len(seq) <= 0:
+        yield []
+    else:
+        for permutation in permutations(seq[1:]):
+            for index in range(len(seq)):
+                yield permutation[:index] + [seq[0]] + permutation[index:]
 
 def make_joint(withdraw, old_pass, new_pass):
     """Return a password-protected withdraw function that has joint access to
