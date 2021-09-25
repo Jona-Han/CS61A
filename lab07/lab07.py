@@ -45,17 +45,11 @@ def hailstone(n):
     2
     1
     """
+    yield n
     if n == 1:
-        return 1
+        pass
     elif n % 2 == 0:
-        return hailstone(n // 2)
+        yield from hailstone(n // 2)
     else:
-        return hailstone(n * 3 + 1)
-    #yield n
-    #if n == 1:
-    #    pass
-    #elif n % 2 == 0:
-    #    yield from hailstone(n // 2)
-    #else:
-    #    yield from hailstone(n * 3 + 1)
+        yield from hailstone(n * 3 + 1)
 
