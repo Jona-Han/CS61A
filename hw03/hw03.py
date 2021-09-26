@@ -183,8 +183,7 @@ def replace_leaf(t, find_value, replace_value):
         else:
             return t
     else:
-        bs = [replace_leaf(b, find_value, replace_value) for b in branches(t)]
-        return tree(label(t), bs)
+        return tree(label(t), [replace_leaf(branch, find_value, replace_value) for branch in branches(t)])
 
 def preorder(t):
     """Return a list of the entries in this tree in the order that they

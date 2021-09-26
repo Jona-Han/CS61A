@@ -273,7 +273,7 @@ def add_trees(t1, t2):
     ...                 tree(5,
     ...                      [tree(6,
     ...                            [tree(7)]),
-    ...                       tree(8)])])
+    ...                       tree(8)])]
     >>> print_tree(add_trees(numbers, numbers))
     2
       4

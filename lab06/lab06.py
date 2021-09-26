@@ -77,7 +77,7 @@ def insert_items(lst, entry, elem):
     for index, element in enumerate(lst):
         if element == entry and flag == 0:
             lst.insert(index + 1, elem)
-            flag += 1
+            flag = 1
             continue
         flag = 0
     return lst

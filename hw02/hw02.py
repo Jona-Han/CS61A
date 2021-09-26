@@ -100,11 +100,11 @@ def missing_digits(n):
     """
     if n // 10 == 0:
         return 0
-    missing_number = n % 10 - (n // 10) % 10 - 1
-    if (missing_number < 0):
-        missing_number = 0
-    return missing_digits(n//10) + missing_number
-        
+    elif (n % 10 - n // 10 % 10) > 1:
+        return (n % 10 - n // 10 % 10 - 1) + missing_digits(n//10)
+    else:
+        return missing_digits(n // 10)
+
 def next_largest_coin(coin):
     """Return the next coin. 
     >>> next_largest_coin(1)
@@ -161,5 +161,5 @@ def make_anonymous_factorial():
     >>> check(HW_SOURCE_FILE, 'make_anonymous_factorial', ['Assign', 'AugAssign', 'FunctionDef', 'Recursion'])
     True
     """
-    return 'YOUR_EXPRESSION_HERE'
+    return (lambda f: lambda k: f(f, k))(lambda f, k: k if k == 1 else mul(k, f(f, sub(k, 1))))
 
