@@ -1,3 +1,4 @@
+"""Linked list implementation using functions. Teaches concepts of data abstraction."""
 empty = 'empty'
 
 def is_link(s):
