@@ -73,6 +73,7 @@ def insert_items(lst, entry, elem):
     >>> large_lst3 is large_lst
     True
     """
+
     flag = False
     for index, element in enumerate(lst):
         if element == entry and not flag:
