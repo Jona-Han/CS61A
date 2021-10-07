@@ -56,8 +56,6 @@ def cumulative_mul(t):
         cumulative_mul(branch)
         t.label *= branch.label
         
-    
-
 
 def has_cycle(link):
     """Return whether link contains a cycle.
