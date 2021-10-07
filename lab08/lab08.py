@@ -73,7 +73,8 @@ def has_cycle(link):
     >>> has_cycle(u)
     False
     """
-    "*** YOUR CODE HERE ***"
+    cache = []
+    while link != 
 
 def has_cycle_constant(link):
     """Return whether link contains a cycle.
